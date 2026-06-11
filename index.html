@@ -998,6 +998,14 @@
     </main>
 
     <script>
+        // ==========================================
+        //  MODIFIEZ VOS CHIFFRES ICI DIRECTEMENT :
+        // ==========================================
+        const VALEUR_SERVEURS = 2850;   // Remplacez ici pour modifier les serveurs
+        const VALEUR_UTILISATEURS = 1420900; // Remplacez ici pour modifier les utilisateurs
+        const VALEUR_RAIDS = 8412;       // Remplacez ici pour modifier les raids
+        // ==========================================
+
         // Immersive Tab Switching System
         function changeTab(tabId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-section'));
@@ -1016,7 +1024,9 @@
             let element = document.getElementById(elementId);
             if(!element) return;
             let currentCount = 0;
-            let animationStep = Math.ceil(maximumValue / 80);
+            
+            // Si la valeur est à 0, on l'affiche directement sans diviser par 80 (évite le bug du 0)
+            let animationStep = maximumValue > 0 ? Math.ceil(maximumValue / 80) : 1;
 
             let pulseTimer = setInterval(() => {
                 currentCount += animationStep;
@@ -1031,9 +1041,9 @@
 
         // Initialize HUD stats on load
         window.addEventListener('DOMContentLoaded', () => {
-            launchCounter('gstat-servers', 2850);
-            launchCounter('gstat-users', 1420900);
-            launchCounter('gstat-raids', 8412);
+            launchCounter('gstat-servers', VALEUR_SERVEURS);
+            launchCounter('gstat-users', VALEUR_UTILISATEURS);
+            launchCounter('gstat-raids', VALEUR_RAIDS);
             
             // Dynamic Ping Simulation
             const pingBox = document.getElementById('gstat-ping');
